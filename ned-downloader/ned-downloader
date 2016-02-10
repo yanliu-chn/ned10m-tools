@@ -1,0 +1,60 @@
+#!/bin/bash
+# Author: Yan Liu (yanliu@uiuc.edu)
+# Date: May 09, 2011
+# Utility to download ned datasets in a batch
+hdir="/home/yanliu/ned-downloader"
+demlistf="$hdir/query-page/dem-list"
+urlprefix=`tail -n 1 $hdir/query-page/URLPREFIX`
+mylog="$hdir/log/ned.log"
+odir="/gisolve/jobs/ned-10m-dem"
+if [ ! -z "$1" ]; then
+	odir=$1
+fi
+if [ ! -d "$odir" ]; then
+	mkdir -p $odir
+fi
+while read dementry
+do
+	demname=`echo "$dementry" | awk '{print $1}'`
+	demurl=`echo "$dementry" | awk '{print $2}'`
+	ofile="$odir/${demname}.zip"
+	if [ -f "$ofile" ]; then
+		echo "===[`date +'%H:%M:%S %m/%d/%y'`]DONE: $demname already exists at $ofile===" >> $mylog
+		continue
+	fi
+	# submit dem request
+	echo "===[`date +'%H:%M:%S %m/%d/%y'`]SUBMIT: $demname $demurl $urlprefix===" >> $mylog
+	r=`php $hdir/ned-submit.php "$demurl" "$urlprefix"` 
+	if [ $? -ne 0 ]; then
+		echo "===[`date +'%H:%M:%S %m/%d/%y'`]ERROR: could not submit $demname===" >> $mylog
+		continue
+	fi
+	reqid=`echo "$r" | awk '{print $1}'`
+	ep=`echo "$r" | awk '{print $2}'`
+	echo "===[`date +'%H:%M:%S %m/%d/%y'`]SUBMIT-OK: $demname $reqid $ep===" >> $mylog
+	durl=""
+	while [ 1 ]
+	do
+		# track job status
+		r=`php $hdir/ned-track.php "$urlprefix" "$reqid" "$ep"`
+		if [ $? -ne 0 ]; then
+			echo "===[`date +'%H:%M:%S %m/%d/%y'`]ERROR: could not track $demname===" >> $mylog
+			break
+		fi
+		# download if available
+		if [ ! -z "$r" ]; then
+			echo "===[`date +'%H:%M:%S %m/%d/%y'`]DOWNLOAD: $demname from $r===" >> $mylog
+			wget -q -O $ofile "$r"  >& /dev/null
+			if [ $? -ne 0 ]; then
+				echo "===[`date +'%H:%M:%S %m/%d/%y'`]ERROR: could not download $demname===" >> $mylog
+			else
+				echo "===[`date +'%H:%M:%S %m/%d/%y'`]DONE: $demname saved as $ofile===" >> $mylog
+			fi
+			break
+			
+		else
+			sleep 10
+		fi
+		echo "===[`date +'%H:%M:%S %m/%d/%y'`]TRACK: $demname $reqid===" >> $mylog
+	done
+done<$demlistf

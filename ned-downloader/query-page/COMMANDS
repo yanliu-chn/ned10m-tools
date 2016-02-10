@@ -1,0 +1,13 @@
+# open the query web page, record url w/ session id to file URLPREFIX
+#   e.g., http://gisdata.usgs.gov/XMLWebServices2/(S(1kfxjijbx31hj4fkwrugnxyh))/
+# edit downloaded html to get ned 1/3 arc entries out as ned-10m.html
+# split dataset html desc into lines
+sed -r "s/<\/a><br>/<\/a><br>\n/g" ned-10m.html > ned-10m-list.html
+# remove empty lines
+# create url list
+awk -F\' '{print $2}' ned-10m-list.html > url-list
+# change &amp; to &
+sed -r "s/\&amp\;/\&/g" url-list > url-list2
+# index list with dem name
+while read aline; do demname=`echo "$aline" | sed -r "s/^.+EIDL=([a-zA-Z0-9]+).+$/\1/"`; echo "$demname $aline" >> dem-list; done<url-list2
+# file dem-list is the input for ned-downloader script

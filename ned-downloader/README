@@ -1,0 +1,22 @@
+National Elevation Dataset Fusion Tool
+Author: Yan Liu (yanliu@uiuc.edu)
+Version: 0.2.1
+Date: Sept 21, 2012
+
+NED fusion tool is a semi-auto utility for downloading large number of high-resolution national elevation datasets from USGS National Map project using their web service (as of 2011).
+
+The problem with downloading from NED web site is that you are given a big list of pre-computed zip files (each file covers 1 degree x 1 degree). You will need to click each link. But clicking does not lead to a file saving step. Each click is a request to tell ned data server to queue a downloading request. When data server is available, it will extract data, package it, and tell you it is ready, then displaying file saving dialog to save as local file. A dialog is pop up upon each click to display aforementioned state transition. But few people are interested in clicking hundreds of times, waiting for 30 seconds or more for each click. Here comes this utility to do it in one batch.
+
+It is semi-automatic still: you need to give a list of URLs to this utility (I'll make it automatic in the next version when I find time to do it). Here are the steps you should follow:
+
+1. Find ned data on USGS
+Go to http://cumulus.cr.usgs.gov/webappcontent/neddownloadtool/NEDDownloadToolDMS.html and specify the area/location of your interest. You will be guided to a web page with lists of ned datasets. Save this webpage as local page.
+
+2. Create URL list
+NED Fusion Tool needs a list of URLs to work. Please read carefully the instructions in file query-page/COMMANDS. It tells you how to process saved local web page and create the URL list
+
+3. Config NED Fusion Tool
+Edit NED Fusion Tool script to config properly download dir, dem-list path, URLPREFIX path (make sure the last line of this file has the valid URL prefix), log path, and output directory. You can feed URL list by editing the script directly or as a command argument.
+
+4. Download
+This is the simplest task: just run "ned-downloader" on a linux box, and let it run until finished. Check log for progress. If you already downloaded portion of datasets before, you can set the output directory to where those datasets are, this tool will skip them.

@@ -1,0 +1,157 @@
+/* ================INSTRUCTIONS=================*/ 
+/* By changing the classes below, you can add your own custom styles for various areas of the header. In order for your changes to work though, you MUST include a reference in your HTML pages to both the common CSS file and custom CSS file in that order.
+
+Instructions are provided below for customizing these classes. */
+
+/* ================BANNER=======================*/  
+/* TO DISPLAY A CUSTOM BANNER IMAGE: 
+If you want to display a custom banner, change the "background: url" to point to a local banner, or external, image location.
+
+TO DISPLAY A CUSTOM BANNER COLOR (NO IMAGE): 
+If you would rather display a color instead of a banner image, change the "background: url" portion to point to "" and set the background color (#006633) to whatever color you wish to display.
+NOTE: You can use either hexadecimal color codes (i.e. - #006633, #063) or HTML color names (i.e. - "black"). */ 
+#usgscolorband { 
+	background: #0C3F05 178px 0px no-repeat; 
+} 
+/* ================SITE TITLE===================*/ 
+/* TO DISPLAY A CUSTOM SITE TITLE BAR: 
+The #usgstitle class is specific to the colored site title bar that lies beneath the USGS identifier. To change the color of this bar, set the "background-color" attribute below to the color you wish to display and change the "color" attribute to set the text color.
+NOTE: You can use either hexadecimal color codes (i.e. - #000000) or HTML color names (i.e. - "black"). */ 
+#usgstitle { 
+    background-color: #0C3F05; 
+    color: #ffffff; 
+} 
+/* =============STANDARD CONTENT===============*/ 
+/* TO CHANGE THE TEXT SIZE OF THE CONTENT:
+By default, USGS has set the font size to "small" in order to provide a consistent size for content across all pages. If you would prefer not to have a pre-defined font size for your pages, change the "font-size" attributes below to "font-size: 100%;". */
+body {
+	font-size: 12px;
+}
+th, td {
+	font-size: 12px;
+}
+
+
+#usgsfooter {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	clear: both;
+	margin: 0;
+}
+
+
+
+.imgborder
+{
+	BORDER-COLOR: #000000;
+    BORDER-BOTTOM:#000000 solid 1px;
+    BORDER-LEFT:#000000 solid 1px;
+    BORDER-RIGHT:#000000 solid 1px;
+    BORDER-TOP:#000000 solid 1px;
+    margin-bottom:5px;
+}
+
+.photo
+{
+	font-size: 10px;
+	color: #0C3F05;
+	font-weight: bold;
+}
+
+.cellborder
+{
+	BORDER-COLOR: #000000;
+    BORDER-BOTTOM:#000000 solid 1px;
+    BORDER-LEFT:#000000 solid 1px;
+    BORDER-RIGHT:#000000 solid 1px;
+    BORDER-TOP:#000000 solid 1px;
+}
+
+.white
+{
+	font-size: 24px;
+	color: #ffffff;
+}
+
+.subtitle
+{
+	font-size: 14px;
+	color: #0C3F05;
+	font-weight: bold;
+}
+
+.title
+{
+	font-size: 16px;
+	color: #000000;
+	font-weight: bold;
+}
+
+A.leftnav:active {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 12px;
+color: #000000;
+text-decoration: none;
+}
+A.leftnav:hover {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 12px;
+color: #000000;
+text-decoration: none;
+}
+A.leftnav:link {
+color: #000000;
+text-decoration: none;
+}
+A.leftnav:visited {
+color: #000000;
+text-decoration: none;
+}
+
+.green
+{
+	color: #0C3F05;
+	font-weight: bold;
+}
+
+.photo_desc
+{
+	font-size: 12px;
+	color: #0C3F05;
+	font-weight: normal;
+	padding: 5px;
+}
+
+A.green
+{
+	color: #0C3F05 ! important;
+	font-weight: bold;
+}
+
+.default
+{
+	font-size: 12px;
+	color: #000000;
+	font-weight: normal;
+}
+
+
+
+
+
+.menu
+{
+    COLOR:white ! important;
+    BACKGROUND-COLOR:#0C3F05;
+    font-family:Arial,Verdana,Helvetica;
+    font-size:12px;
+    FONT-WEIGHT:bold;
+    HEIGHT:16px;
+    LINE-HEIGHT:17pt;
+    text-align:  left;
+    PADDING-TOP:3px;
+	padding-left:3px;
+    TEXT-DECORATION:none !important;
+	width:250px;
+}
+
